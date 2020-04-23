@@ -9,7 +9,7 @@ node12 = Node(12)
 node16 = Node(16)
 node25 = Node(25)
 node10 = Node(10, node8, node12)
-node20 = Node(20, node16, node25)
+node20 = Node(10, node16, node25)
 node15 = Node(15, node10, node20)
 
 def sum_of_nodes(head, result=0):
@@ -25,4 +25,22 @@ def sum_of_nodes(head, result=0):
     
     return result
     
-print (sum_of_nodes(node15))
+def SumOfChildOfX(head, target, result=0):
+    
+    if head is not None and head.val==target:
+        if head.right is not None:
+            result += head.right.val
+            
+        if head.left is not None:
+            result += head.left.val
+        
+    if head.right is not None:
+        result += SumOfChildOfX(head.right, target)
+        
+    if head.left is not None:
+        result += SumOfChildOfX(head.left, target)
+    
+    return result
+        
+#print(sum_of_nodes(node15))
+print(SumOfChildOfX(node15, 10))
