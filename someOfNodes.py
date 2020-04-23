@@ -6,7 +6,7 @@ class Node:
 
 node8 = Node(8)
 node12 = Node(12)
-node16 = Node(8)
+node16 = Node(16)
 node25 = Node(25)
 node10 = Node(10, node8, node12)
 node20 = Node(20, node16, node25)
@@ -58,7 +58,30 @@ def SumOfParentOfX(head, target, result=0):
         result += SumOfParentOfX(head.left, target)
     
     return result
+    
+    
+def isLeave(node):
+    if node is not None:
+        if node.left is None and node.right is None:
+            return True
+    return False
+    
+    
+def sumOfLeftLeaves(head, result=0):
+    
+    if head is not None:
+        if head.left is not None and isLeave(head.left):
+            result += head.left.val
+            
+    if head.left is not None:
+        result += sumOfLeftLeaves(head.left)
+    
+    if head.right is not None:
+        result += sumOfLeftLeaves(head.right) 
         
+    return result
+       
 #print(sum_of_nodes(node15))
 #print(SumOfChildOfX(node15, 10))
-print(SumOfParentOfX(node15, 8))
+#print(SumOfParentOfX(node15, 8))
+print(sumOfLeftLeaves(node15))
